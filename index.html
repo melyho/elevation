@@ -10,7 +10,7 @@
 		:root{--accent:#0092DB;--bg:#ffffff;--text:#111}
 		body{margin:0;font-family:Inclusive Sans,sans-serif;background:var(--bg);color:var(--text); letter-spacing:-1%; font-weight:500}
 		.navbar{display:flex;align-items:center;justify-content:space-between;padding:12px 50px;border-bottom:1px solid #eee}
-		.nav-left,.nav-right{display:flex;align-items:center;gap:18px}
+		.nav-left,.nav-right{display:flex;align-items:center;gap:28px}
 		.brand{display:flex;align-items:center;gap:10px;}
 		.brand .logo{width:auto; height:4.5em; border-radius:6px;display:inline-block}
 		.nav-links{display:flex;gap:14px;align-items:center}
@@ -29,6 +29,12 @@
 		.dropdown-toggle:focus-visible,.nav-links a:focus-visible,.nav-right .connect:focus-visible,.cta:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 		.hamburger{display:none;width:2.5rem;height:auto;cursor:pointer}
 		.hamburger img{width:100%;height:100%}
+		.carousel{position:absolute;top:100px;right:0;display:flex;align-items:center;gap:12px;z-index:10}
+		.carousel-track{position:relative;width:340px;height:420px;overflow:hidden;border-radius:24px;}
+		.carousel-slide{display:none;width:100%;height:100%;object-fit:cover}
+		.carousel-slide.active{display:block}
+		.carousel-arrow{width:44px;height:44px;border:none;border-radius:999px;background:rgba(255,255,255,.95);box-shadow:0 12px 24px rgba(0,0,0,.08);cursor:pointer;font-size:1.6rem;color:#005167;display:flex;align-items:center;justify-content:center}
+		.carousel-arrow:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 		@media(max-width:1000px){
 			.nav-links{display:none}
 			.nav-right{display:none}
@@ -84,6 +90,21 @@
 		</div>
 		<img src="pball-landing.svg" alt="Pickleball Landing" style="width:65%;height:auto;display:block">
 	</div>
+
+	<div style="position: relative; width: 100%; max-width: 65%; margin: 0 auto; padding: 40px 20px 0; box-sizing: border-box;">
+		<img src="new-programs.svg" alt="New Programs" style="width: 100%; height: auto; display: block;">
+		<h2 style="font-family: BBH Bogle; position: absolute; top: 100px; left: 50px; margin: 0; color: #005167; font-size: 4rem; letter-spacing: 1px; font-weight: 400; border-radius: 12px; max-width: calc(100% - 40px); line-height: 95%;">CHECK OUT OUR NEW PROGRAMS!</h2>
+		<div class="carousel">
+			<button class="carousel-arrow" type="button" aria-label="Previous slide">‹</button>
+			<div class="carousel-track">
+				<img class="carousel-slide active" src="flyer.webp" alt="Programs slide 1">
+				<img class="carousel-slide" src="pball-landing.svg" alt="Programs slide 2">
+				<img class="carousel-slide" src="new-programs.svg" alt="Programs slide 3">
+			</div>
+			<button class="carousel-arrow" type="button" aria-label="Next slide">›</button>
+		</div>
+	</div>
+
 	<script>
 		const dropdowns = document.querySelectorAll('[data-dropdown]');
 
@@ -103,6 +124,31 @@
 				toggle.setAttribute('aria-expanded', String(!isOpen));
 			});
 		});
+
+		const carousel = document.querySelector('.carousel');
+		const slides = carousel?.querySelectorAll('.carousel-slide');
+		const prevButton = carousel?.querySelector('.carousel-arrow:nth-of-type(1)');
+		const nextButton = carousel?.querySelector('.carousel-arrow:nth-of-type(2)');
+		let activeIndex = 0;
+
+		function showSlide(index) {
+			slides?.forEach((slide, slideIndex) => {
+				slide.classList.toggle('active', slideIndex === index);
+			});
+		}
+
+		function previousSlide() {
+			activeIndex = activeIndex === 0 ? (slides.length - 1) : (activeIndex - 1);
+			showSlide(activeIndex);
+		}
+
+		function nextSlide() {
+			activeIndex = activeIndex === slides.length - 1 ? 0 : (activeIndex + 1);
+			showSlide(activeIndex);
+		}
+
+		prevButton?.addEventListener('click', previousSlide);
+		nextButton?.addEventListener('click', nextSlide);
 
 		document.addEventListener('click', () => {
 			dropdowns.forEach(closeDropdown);
