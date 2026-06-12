@@ -7,8 +7,8 @@
 	<style>
 		@import url('https://fonts.googleapis.com/css2?family=Inclusive+Sans:ital,wght@0,300..700;1,300..700&display=swap');
 		@import url('https://fonts.googleapis.com/css2?family=BBH+Bogle&display=swap');
-		:root{--accent:#0092DB;--bg:#ffffff;--text:#111}
-		body{margin:0;font-family:Inclusive Sans,sans-serif;background:var(--bg);color:var(--text); letter-spacing:-1%; font-weight:500; display: flex; flex-direction: column; padding: 1.5rem 12rem; margin-top: 4.5rem; }
+		:root{--accent:#0092DB;--bg:#ffffff;--text:#073441;}
+		body{margin:0;font-family:Inclusive Sans,sans-serif;background:var(--bg);color:var(--text); letter-spacing:-1%; font-weight:500; display: flex; flex-direction: column; padding: 1.5rem 12rem; margin-top: 4.5rem; gap: 4rem;}
 		.navbar{display:flex;align-items:center;justify-content:space-between;padding:12px 50px;border-bottom:1px solid #eee; position: fixed; top: 0; left: 0; right: 0; z-index: 1000; background:var(--bg); height: 4rem;}
 		.nav-left,.nav-right{display:flex;align-items:center;gap:28px}
 		.brand{display:flex;align-items:center;gap:10px;}
@@ -35,10 +35,23 @@
 		.carousel-slide.active{display:block}
 		.carousel-arrow{width:44px;height:44px;border:none;border-radius:999px;background:rgba(255,255,255,.95);box-shadow:0 12px 24px rgba(0,0,0,.08);cursor:pointer;font-size:1.6rem;color:#005167;display:flex;align-items:center;justify-content:center}
 		.carousel-arrow:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+		.spotlight-grid{display:grid;grid-template-columns:1.333fr 1fr 1fr;grid-template-rows:repeat(2,minmax(0,1fr));gap:20px;align-items:stretch;width:100%;}
+		.spotlight-card{width:100%;min-height:0;border-radius:24px;background:#F9FDFF;overflow:hidden;display:flex;flex-direction:column;justify-content:flex-start;align-items:flex-start;padding:0;}
+		.spotlight-card.feature{padding:32px;gap:20px;}
+		.spotlight-card.feature h1{margin:0;font-family:BBH Bogle;color:#005167;font-size:3rem;letter-spacing:1px;font-weight:400;}
+		.spotlight-card.feature p{margin:0;font-family:Inclusive Sans,sans-serif;font-size:1.1rem;line-height:1.6;color:#073441;letter-spacing:-1px;}
+		.spotlight-card.feature .cta{margin-top:16px;}
+		.spotlight-card.feature img{width:100%;height:auto;display:block;}
+		.spotlight-card[data-aspect="rectangle"]{aspect-ratio:4 / 3;}
+		.spotlight-card[data-aspect="square"]{aspect-ratio:1 / 1;}
+		.spotlight-card img{width:100%;height:100%;object-fit:cover;display:block;}
 		@media(max-width:1000px){
 			.nav-links{display:none}
 			.nav-right{display:none}
 			.hamburger{display:inline-block}
+			.spotlight-grid{grid-template-columns:1fr;grid-template-rows:none;}
+			.spotlight-card[data-aspect="rectangle"],
+			.spotlight-card[data-aspect="square"]{aspect-ratio:auto;}
 		}
 	</style>
 </head>
@@ -81,7 +94,7 @@
 		</div>
 	</nav>
 	
-	<div style="flex-direction: column; justify-content: center; align-items: center; display: flex; padding: 40px 0px; gap: 20px; width: 100%; margin: 0 auto; text-align: center;">
+	<div style="flex-direction: column; justify-content: center; align-items: center; display: flex; padding-top: 40px; gap: 20px; width: 100%; margin: 0 auto; text-align: center;">
 		<h1 style="font-family: BBH Bogle; color:#005167; font-size: 4.3rem; letter-spacing:1px; font-weight: 400; margin: 0; text-align:center">PLAY PICKLEBALL IN ONTARIO</h1>
 		<h2 style="font-size: 1.25rem; color:#073441; font-weight: 500; letter-spacing: -2%; max-width: 600px; text-align: center; margin-top:-10px;">Join Canada's most exciting and fastest-growing pickleball community! We welcome players of all skill levels onto the court.</h2>
 		<div style="display: flex; gap: 16px; flex-wrap: wrap; justify-content: center; margin-top: -15px;margin-bottom: 30px;">
@@ -109,6 +122,32 @@
 				<button class="carousel-arrow" type="button" aria-label="Next slide">›</button>
 			</div>
 			</div>
+		</div>
+	</div>
+
+	<div class="spotlight-grid">
+		<div class="spotlight-card feature" data-aspect="rectangle">
+			<h1>SPOTLIGHT SECTION</h1>
+			<p>
+				Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+				Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi.
+			</p>
+			<a class="cta" href="#">Button</a>
+		</div>
+		<div class="spotlight-card" data-aspect="square">
+			<img src="Frame 54.png" alt="Spotlight">
+		</div>
+		<div class="spotlight-card" data-aspect="square">
+			<img src="spotlight-right.svg" alt="Spotlight">
+		</div>
+		<div class="spotlight-card" data-aspect="rectangle">
+			<img src="Frame 55.png" alt="Spotlight">
+		</div>
+		<div class="spotlight-card" data-aspect="square">
+			<img src="Frame 54.png" alt="Spotlight">
+		</div>
+		<div class="spotlight-card" data-aspect="square">
+			<img src="spotlight-left.svg" alt="Spotlight">
 		</div>
 	</div>
 
